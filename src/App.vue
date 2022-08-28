@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-   
-    <template v-if="!isLoading">
+    <template>
       <ul>
         <RouterLink to="/"><li>Todo List</li></RouterLink>
         <RouterLink to="/new"><li>New Todo</li></RouterLink>
