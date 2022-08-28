@@ -1,8 +1,16 @@
 <template>
-  <div id="app">
-    Merhaba Vuejs !
+  <div class="container">
+    <h2 v-if="isLoading">Loading TODOs...</h2>
+    <template v-if="!isLoading">
+      <ul>
+        <RouterLink to="/"><li>Todo List</li></RouterLink>
+        <RouterLink to="/new"><li>New Todo</li></RouterLink>
+      </ul>
+      <RouterView />
+    </template>
   </div>
 </template>
+
 
 <script>
 
