@@ -1,6 +1,23 @@
+<script setup>
+  import { ref } from 'vue';
+  import {todosFactory} from './todosSetup';
+  import { RouterLink, RouterView } from 'vue-router'
+  import todoService from './services/todoService';
+
+  const {update} = todosFactory();
+
+  const isLoading = ref(true);
+  async function prefetch() {
+    update(await todoService.getTodos());
+    isLoading.value = false;
+  }
+  prefetch();
+</script>
+
 <template>
   <div class="container">
-    <template>
+    <h2 v-if="isLoading">Loading TODOs...</h2>
+    <template v-if="!isLoading">
       <ul>
         <RouterLink to="/"><li>Todo List</li></RouterLink>
         <RouterLink to="/new"><li>New Todo</li></RouterLink>
@@ -10,22 +27,6 @@
   </div>
 </template>
 
-
-<script>
-
-export default {
-  name: 'App',
-
-}
-</script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import './assets/base.css';
 </style>
